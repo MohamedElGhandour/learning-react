@@ -1,0 +1,15 @@
+.person {
+    margin: 20px auto;
+    padding: 20px;
+    width: 60%;
+    border: 1px solid #eee;
+    box-shadow: 1px 1px 1px #111;
+    text-align: center;
+}
+ 
+
+@media (min-width: 500px) {
+    .person {
+        background-color: #eee;
+    }
+}
