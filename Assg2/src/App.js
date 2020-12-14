@@ -1,40 +1,29 @@
-import React, { setState, Component } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 import ValidationComponent from './ValidationComponent/ValidationComponent';
 import CharComponent from './CharComponent/CharComponent';
 
 class App extends Component {
-
   state = {
-    text:'',
+    length:0,
+    value:''
+  };
+  changeInput = (event) => {
+    this.setState({length:event.target.value.length,value:event.target.value});
+
   }
-
-  changeInputHandler = () => {
-    // this.setState({text:event.target.value,});
-    document.getElementById('para').innerHTML = parseInt(document.getElementById('para').innerHTML) + 1;
-
+  removeChar = (index) => {
+    const aftDel = this.state.value.split('');
+    aftDel.splice(index, 1);
+    const befDel = aftDel.join('');
+    this.setState({length:befDel.length,value:befDel});
   }
-
-  clickDeleteHandler = (index) => {
-    // const text = this.state.text;
-    // const part1 = text.substring(0, index);
-    // const part2 = text.substring(index + 1, text.length);
-    // const newText = (part1 + part2);
-    // this.setState({text:newText});
-    const text = this.state.text.split('');
-    text.splice(index, 1);
-    const newText = text.join('');
-    this.setState({text:newText});
-  }
-
-
   render() {
-    // const char = this.state.text.split('');
-    // const cards = char.map((el, index) => {
-    //   return <CharComponent key={index} onClick={() => this.clickDeleteHandler(index)} char={el} />
-    // });
-    
+     const charComp = (<div>
+        {this.state.value.split('').map((letter, index) => {
+          return <CharComponent key={index} click={() => this.removeChar(index)} char={letter} />
+        })}
+      </div>);
     return (
       <div className="App">
         <ol>
@@ -46,12 +35,13 @@ class App extends Component {
           <li>When you click a CharComponent, it should be removed from the entered text.</li>
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
-        <div>
-          <input type='text' onChange={this.changeInputHandler} />
-          <p id='para'>1</p>
-          {/* <ValidationComponent length={this.state.text.length} />
-          {cards} */}
-        </div>
+        <input type="text" 
+        onChange={this.changeInput}
+        value={this.state.value} />
+        <p>the length: {this.state.length}</p>
+        <p>{this.state.value}</p>
+        <ValidationComponent length={this.state.length} />
+        {charComp}
       </div>
     );
   }

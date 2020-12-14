@@ -1,7 +1,7 @@
 import React from 'react';
 import './person.css';
 import classes from './person.css';
-console.log(classes);
+// console.log(classes);
 
 const person = (props) => {
     // const rnd = Math.random();

@@ -1,5 +1,5 @@
-import React, { useState, Component } from 'react';
-import logo from './logo.svg';
+import React, { /*useState,*/ Component } from 'react';
+// import logo from './logo.svg';
 import Person from './Person/Person';
 // import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 // import Games from './Games/Games';
@@ -77,7 +77,7 @@ class App extends Component {
     const persons = [...this.state.Person];
     persons.splice(index, 1);
     this.setState({ Person: persons });
-    console.log(persons, this.state);
+    // console.log(persons, this.state);
   }
 
   render() {
@@ -88,9 +88,12 @@ class App extends Component {
     if (this.state.togglePersonState) {
       persons = (
         <div>
-          {this.state.Person
-            .map((persons, index) => {
-              return <Person key={persons.id} change={(event) => this.changeNameInput(event, persons.id)} click={() => this.deletePersonHandler(index)} name={persons.name} age={persons.age} />
+          {this.state.Person.map((persons, index) => {
+              return <Person key={persons.id} 
+              change={(event) => this.changeNameInput(event, persons.id)} 
+              click={() => this.deletePersonHandler(index)} 
+              name={persons.name} 
+              age={persons.age} />
             })}
         </div>
       );

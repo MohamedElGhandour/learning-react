@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./containers/App";
-import * as serviceWorker from "./serviceWorker";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './containers/App';
+import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App titleHeader="Hello Wrold! (React)" />
-  </React.StrictMode>,
-  document.getElementById("root")
+  /* <React.StrictMode> */
+    <App appTitle="Hello World"/>
+  /* </React.StrictMode> */
+  ,document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
