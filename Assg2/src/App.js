@@ -38,7 +38,7 @@ class App extends Component {
         <input type="text" 
         onChange={this.changeInput}
         value={this.state.value} />
-        <p>the length: {this.state.length}</p>
+        <p>the length: <span>{this.state.length}</span></p>
         <p>{this.state.value}</p>
         <ValidationComponent length={this.state.length} />
         {charComp}

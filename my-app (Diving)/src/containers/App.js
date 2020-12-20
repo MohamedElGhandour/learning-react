@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import Aux from '../hoc/Aux';
+import withNewClass from '../hoc/withNewClass';
+import Auth from '../context/auth-Context'
 import classes from './App.css';
 
 class App extends Component {
@@ -17,6 +20,8 @@ class App extends Component {
       chagneNameState:this.changeNameInput,
       togglePersonState: false, 
       toggleCockpit: true, 
+      changeCount:0,
+      authenticated: false
     };
   }
 
@@ -50,7 +55,9 @@ class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.Person];
     persons[personIndex] = person;
-    this.setState({ Person: persons });
+    this.setState((prevState, props) =>{
+      return { Person: persons, changeCount: prevState.changeCount + 1 }
+    });
   }
 
   togglePersonHandler = () => {
@@ -62,6 +69,10 @@ class App extends Component {
     const persons = [...this.state.Person];
     persons.splice(index, 1);
     this.setState({ Person: persons });
+  }
+
+  authenticated = () => {
+    this.setState({authenticated:true});
   }
 
   render() {
@@ -76,26 +87,29 @@ class App extends Component {
           <Persons 
           persons={this.state.Person}
           changed={this.changeNameInput}
-          deleted={this.deletePersonHandler} />
+          deleted={this.deletePersonHandler}
+          isAuth={this.state.authenticated} />
         </div>
       );
     }
 
     return (
-      <div className={classes.App}>
+      <Aux>
         <button onClick={() => {
-          this.setState({toggleCockpit:false});
+          this.setState({toggleCockpit:!this.state.toggleCockpit});
         }}>remove Cockpit</button>
-        {this.state.toggleCockpit ?<Cockpit 
-        title={this.props.appTitle}
-        person={this.state.Person}
-        isPersonShowed={this.state.togglePersonState}
-        toggled={this.togglePersonHandler} /> : null}
-        {persons}
-      </div>);
+        <Auth.Provider value= {{authenticated: this.state.authenticated, login: this.authenticated}}>
+          {this.state.toggleCockpit ?<Cockpit 
+          title={this.props.appTitle}
+          personLength={this.state.Person.length}
+          isPersonShowed={this.state.togglePersonState}
+          toggled={this.togglePersonHandler} /> : null}
+          {persons}
+        </Auth.Provider>
+      </Aux>);
   }
 }
 
 
 
-export default App;
+export default withNewClass(App, classes.App);
