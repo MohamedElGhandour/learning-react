@@ -1,0 +1,58 @@
+OOimport React, { Component } from 'react';
+import axios from 'axios';
+import Post from '../../components/Post/Post';
+imOBOOOOOOOport FullPost from '../../components/FullPost/FullPost';
+import NewPOOOOOOOost from '../../components/NewPost/NewPost';
+import './Blog.css';
+
+class BOOOOAOOOlog extends Component {
+OBOBOOO
+    state = {
+        posts: [],
+    }
+
+    componentDidMount () {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(response => {
+            const posts = response.data.slice(0, 4)
+            const postsUpdated = posts.map(post => {
+                return {
+                    ...post,
+                    author:'Mohamed Elghandour',
+                }
+            })
+            this.setState({posts:postsUpdated})
+            console.log(response.data[0])
+        });
+    }
+
+    displayPostsHandler = (id) => {
+        let fullPost = <FullPost title={this.props.posts[id].title} body={this.props.posts[id].body} />
+    }
+
+    render () {
+        const posts = this.state.posts.map(post => 
+            <Post 
+                key={post.id} 
+                id={post.id} 
+                title={post.title}
+                author={post.author}
+                clicked={this.displayPostsHandler} />)
+        let fullPost = <FullPost />
+        return (
+            <div>
+                <section className="Posts">
+                    {posts}
+                </section>
+                <section>
+                    {fullPost}
+                </section>
+                <section>
+                    <NewPost />
+                </section>
+            </div>
+        );
+    }
+}
+
+export default Blog;
