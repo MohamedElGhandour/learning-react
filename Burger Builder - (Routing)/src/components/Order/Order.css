@@ -1,0 +1,14 @@
+.Order {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  border: 1px soild #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 10px auto;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 10px;
+}
+.Order div {
+  margin: 5px 0;
+}
