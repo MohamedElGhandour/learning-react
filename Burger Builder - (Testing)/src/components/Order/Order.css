@@ -1,0 +1,38 @@
+.Order {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  border: 1px soild #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 10px auto;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 10px;
+  position: relative;
+}
+.Order div {
+  margin: 5px 0;
+}
+
+.Order .Delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 40px;
+  cursor: pointer;
+}
+.Order .Delete img {
+  width: inherit;
+  height: inherit;
+}
+
+@media only screen and (max-width: 650px) {
+  /* For mobile phones: */
+  .Order {
+    display: block;
+    position: relative;
+  }
+  .Order .Value {
+    text-align: center;
+  }
+}
